@@ -1,0 +1,79 @@
+<div class="col-md-10">      
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-md-2" for="Project">Project:</label>
+      <div class="col-md-7">
+        <input type="text" id="Project" name="Project" 
+        [(ngModel)]="ProjectName" class="form-control col-md-4" >
+      </div>
+    </div>
+      <div class="form-group"> 
+        <label class="control-label col-md-2" for="Check"></label>       
+        <div class="col-md-3">
+          <input type="checkbox" id="chkDate" name="chkDate" >        
+          <label for="DateLabel" class="">Set Start and End Date</label> 
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="StartDate" name="StartDate" 
+          [(ngModel)]="ProjectStart" class="form-control col-md-2" placeholder="StartDate">
+        </div>
+        <div class="col-md-2">
+          <input type="text" id="EndDate" name="EndDate" 
+          [(ngModel)]="ProjectEnd" class="form-control col-md-2" placeholder="End Date" >
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="priority" class="control-label col-md-2">Priority:</label>
+        <div class="col-md-7">
+          <input class="col-md-4" type="range" min=0 max=30 id="priority" [(ngModel)]="Priority"
+          value="0">
+        </div>
+      </div>
+      <div class="form-group">
+      <label for="manager" class="control-label col-md-2">Manager:</label>
+      <div class="col-md-6">
+          <input type="text" id="ProjectManager" name="ProjectManager" 
+          [(ngModel)]="ProjectManager" class="form-control col-md-4" >
+      </div>
+      <div>
+          <input type="submit" value="Search" class="btn btn-primary" 
+              id="btnSearch" (click)="SearchManager()" />          
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-9">
+              <input type="submit" value="Add" 
+              class="col-md-offset-9 btn btn-primary" 
+              id="btnAddProject" (click)="AddProject()" 
+              />                
+              <input type="button" value="Reset" 
+              class="col-md-offset-1 btn btn-secondary" 
+              id="btnReset" (click)="ResetFields()"/>                 
+        </div>
+    </div>
+    <div class="row">      
+    </div>
+    <div class="form-group">
+      <div class="col-md-7 col-md-offset-2">
+          <input type="text" id="ProjectSearch" name="ProjectSearch" 
+            [(ngModel)]="ProjectSearch" class="form-control" placeholder="Search...">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-7 col-md-offset-2">
+        <label class="control-label col-md-2" for="SortBy">Sort By:</label>
+        <input type="button" value="Start Date" class="btn btn-secondary" 
+        id="btnStartDate" (click)="SortStartDate()"/>  
+        <input type="button" value="End Date" class="btn btn-secondary" 
+        id="btnEndDate" (click)="SortEndDate()"/>  
+        <input type="button" value="Priority" class="btn btn-secondary" 
+        id="btnPriority" (click)="SortPriority()"/>  
+        <input type="button" value="Completed" class="btn btn-secondary" 
+        id="btnCompleted" (click)="SortCompleted()"/>          
+      </div>
+    </div>
+    <div class="form-group">
+            
+    </div>
+  </form>
+</div>

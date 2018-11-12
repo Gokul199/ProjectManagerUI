@@ -1,0 +1,92 @@
+
+  <div class="col-md-10">      
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Project">Project:</label>
+        <div class="col-md-4">
+          <div class="col-md-8">
+            <input type="text" id="Project" name="Project" 
+            [(ngModel)]="Project" class="form-control" >  
+          </div>        
+          <button type="button" class="btn btn-info btn-lg" 
+          data-toggle="modal" data-target="#myModal">Search</button>          
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Task">Task:</label>
+        <div class="col-md-5">
+          <input type="text" id="Task" name="Task" 
+          [(ngModel)]="Task" class="form-control col-md-4" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Priority">
+          Priority:</label>
+        <div class="col-md-5">
+          <input id="Priority" name="Priority" 
+          [(ngModel)]="Priority" class="form-control" 
+          type="range" min="1" max="30" step="5" value="0">          
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="ParentTask">
+          Parent Task:</label>
+        <div class="col-md-5">
+          <input type="text" id="ParentTask" name="ParentTask" 
+          [(ngModel)]="ParentTask" class="form-control col-md-4" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="StartDate">
+          Start Date:</label>
+        <div class="col-md-5">
+          <input type="text" id="StartDate" name="StartDate" 
+          [(ngModel)]="StartDate" class="form-control col-md-4" 
+          type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="EndDate">
+          End Date:</label>
+        <div class="col-md-5">
+            <input type="text" id="EndDate" name="EndDate" 
+            [(ngModel)]="EndDate" class="form-control col-md-4" 
+            type="date">
+        </div>
+      </div>
+      <div class="form-group">
+          <div class="col-md-6">
+                <input type="submit" value="Add Task" 
+                class="col-md-offset-5 btn btn-primary" 
+                id="btnAddTask" (click)="AddTask()" 
+                />                
+                <input type="button" value="Reset" 
+                class="col-md-offset-1 btn btn-secondary" 
+                id="btnReset" (click)="ResetFields()"/>                 
+            </div>
+        </div>         
+          <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+        
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+        
+            </div>
+          </div>          
+        
+      </form>      
+  </div>
+
+  
+  

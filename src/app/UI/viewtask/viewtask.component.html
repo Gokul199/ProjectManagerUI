@@ -1,0 +1,60 @@
+<div class="col-md-10">      
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-md-2" for="Project">Project:</label>
+      <div class="col-md-5">
+        <input type="text" id="Project" name="Project" 
+        [(ngModel)]="Project" class="form-control col-md-4" >
+      </div>
+    </div>
+  </form>
+  </div>
+      <table class="table">
+        <tbody>         
+          <tr *ngFor="let task of filteredTasks">
+            <td>
+              <div>
+                <b>Task</b>
+              </div>
+              <div class="divTaskDisplay">
+                {{task.Task}}
+              </div>
+            </td>
+            <td>
+              <div>
+                <b>Parent</b>
+              </div>
+              <div class="divTaskDisplay">
+                {{task.ParentTask}}
+              </div>
+            </td>
+            <td>
+              <div>
+                <b>Priority</b>
+              </div>
+              <label class="labelPosition">{{task.Priority}}</label>
+            </td>
+            <td>
+              <div>
+                <b>Start</b>
+              </div>
+              <label class="labelPosition">{{task.StartDate | date:'shortDate'}}</label>
+            </td>
+            <td>
+              <div>
+                <b>End</b>
+              </div>
+              <label class="labelPosition">{{task.EndDate | date:'shortDate'}}</label>
+            </td>
+            <td>
+              <a routerLink="/edit/{{task.TaskID}}" routerLinkActive="active">
+                <button class="btn btn-primary editBtnPos">
+                  Edit</button>
+              </a>
+            </td>
+            <td>
+              <input type="button" class="btn btn-success btn-sm endBtnPos" value="End Task" (click)="endTask(task.TaskID)">
+            </td>
+          </tr>
+        </tbody>
+      </table>
