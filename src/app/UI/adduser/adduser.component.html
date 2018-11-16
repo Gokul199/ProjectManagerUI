@@ -1,3 +1,79 @@
-<p>
-  adduser works!
-</p>
+<div class="col-md-10">      
+    <form class="form-horizontal" #formname="ngForm">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="FirstName">First Name:</label>
+            <div class="col-md-5">
+              <input type="text" id="FirstName" name="FirstName" #name="ngModel"
+              [(ngModel)]="FirstName" class="form-control col-md-4" required>
+            </div>
+            <div class="alert alert-danger" *ngIf="name.invalid&&name.touched">field is invalid</div> 
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-2" for="LastName">Last Name:</label>
+            <div class="col-md-5">
+              <input type="text" id="LastName" name="LastName" #name1="ngModel"
+              [(ngModel)]="LastName" class="form-control col-md-4" required>
+            </div>
+            <div class="alert alert-danger" *ngIf="name1.invalid&&name1.touched">field is invalid</div> 
+          </div>
+          <div class="form-group">
+              <label class="control-label col-md-2" for="EmployeeID">Employee ID:</label>
+              <div class="col-md-5">
+                <input type="text" id="EmployeeID" name="EmployeeID" #name2="ngModel"
+                [(ngModel)]="EmployeeID" class="form-control col-md-4" required>
+              </div>
+              <div class="alert alert-danger" *ngIf="name2.invalid&&name2.touched">field is invalid</div> 
+          </div>
+          <div class="form-group">
+              <div class="col-md-6">
+                    <input type="submit" value={{btnUserTitle}}
+                    class="col-md-offset-5 btn btn-primary" [disabled]="formname.invalid"
+                    id="btnAddUser" (click)="AddUser()" 
+                    />                
+                    <input type="button" value="Reset" 
+                    class="col-md-offset-1 btn btn-secondary" 
+                    id="btnReset" (click)="ResetFields()"/>                 
+                </div>
+            </div>       
+          <div class="form-group">            
+            <div class="col-md-2 col-md-offset-2">                          
+              <input type="text" id="SearchID" name="SearchID" placeholder="Search..." (blur)="filter"
+              [(ngModel)]="filteredEmployeeID" class="form-control col-md-4" > 
+            </div>
+            <label class="control-label col-md-1">Sort:</label>
+            <div class="col-md-6">
+              <button type="button" class="btn btn-light" (click)="Sort('FirstName')">First Name</button>
+              <button type="button" class="btn btn-light" (click)="Sort('LastName')">Last Name</button>
+              <button type="button" class="btn btn-light" (click)="Sort('Id')">Id</button>              
+            </div>             
+        </div>
+    </form>
+</div>
+
+<table class="table">
+    <tbody>         
+      <tr *ngFor="let user of filtereduser">
+        <td>
+            <div class="form-group"> 
+              <div class="col-md-5 col-md-offset-2">
+                <input type="text" id="FirstName" name="FirstName" value="{{user.FirstName}}"
+                class="form-control col-md-4">              
+                <input type="text" id="LastName" name="LastName" value="{{user.LastName}}"
+                class="form-control col-md-4" >
+                <input type="text" id="EmployeeID" name="EmployeeID" value="{{user.EmployeeID}}"
+                  class="form-control col-md-4"> 
+              </div>
+            </div>
+        </td>
+        <td>
+            <div class="form-group">
+              <div class="col-md-2">
+                <button class="btn btn-secondary" (click)="editUser(user.UserID)">Edit</button>
+                <button class="btn btn-secondary" (click)="deleteUser(user.UserID)">Delete</button>
+              </div> 
+            </div>
+        </td>             
+      </tr>
+    </tbody>
+</table>
+

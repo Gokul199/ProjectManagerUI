@@ -1,29 +1,37 @@
 
   <div class="col-md-10">      
-    <form class="form-horizontal">
+    <form class="form-horizontal" #formname="ngForm">
       <div class="form-group">
         <label class="control-label col-md-2" for="Project">Project:</label>
         <div class="col-md-4">
-          <div class="col-md-8">
-            <input type="text" id="Project" name="Project" 
-            [(ngModel)]="Project" class="form-control" >  
+          <div class="col-md-8" [ngClass]="has-error">
+            <input type="text" id="Project" name="Project" #name="ngModel"
+            [(ngModel)]="Project" class="form-control" readonly required>
+            <div class="alert alert-danger" *ngIf="name.invalid&&name.touched">field is invalid</div>     
           </div>        
-          <button type="button" class="btn btn-info btn-lg" 
-          data-toggle="modal" data-target="#myModal">Search</button>          
+            <button type="button" class="btn btn-primary" (click)="openModal(template)">Search</button>          
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-2" for="Task">Task:</label>
-        <div class="col-md-5">
-          <input type="text" id="Task" name="Task" 
-          [(ngModel)]="Task" class="form-control col-md-4" >
+        <div class="col-md-5" [ngClass]="has-error">
+          <input type="text" id="Task" name="Task" #name1="ngModel"
+          [(ngModel)]="Task" class="form-control col-md-4" required>
+          <div class="alert alert-danger" *ngIf="name1.invalid&&name1.touched">field is invalid</div>   
+        </div>
+      </div>
+      <div class="form-group"> 
+        <label class="control-label col-md-2" for="Check"></label>       
+        <div class="col-md-3">
+          <input type="checkbox" id="chkParent" name="chkParent" (change)="AddParent()" [(ngModel)]="parentCheck">        
+          <label for="DateLabel" class="">Parent Task</label> 
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-2" for="Priority">
           Priority:</label>
         <div class="col-md-5">
-          <input id="Priority" name="Priority" 
+          <input id="Priority" name="Priority" [disabled]="parentdisable"
           [(ngModel)]="Priority" class="form-control" 
           type="range" min="1" max="30" step="5" value="0">          
         </div>
@@ -31,32 +39,49 @@
       <div class="form-group">
         <label class="control-label col-md-2" for="ParentTask">
           Parent Task:</label>
-        <div class="col-md-5">
-          <input type="text" id="ParentTask" name="ParentTask" 
-          [(ngModel)]="ParentTask" class="form-control col-md-4" >
-        </div>
+        <div class="col-md-4" [ngClass]="has-error">
+            <div class="col-md-8">
+              <input type="text" id="ParentTask" name="ParentTask"#name2="ngModel"
+              [(ngModel)]="ParentTask" class="form-control" readonly [required]="!parentdisable">   
+              <div class="alert alert-danger" *ngIf="name2.invalid&&name2.touched">field is invalid</div>   
+            </div>       
+              <button type="button" class="btn btn-primary" [disabled]="parentdisable" (click)="openParentModal(parenttemplate)">Search</button>                      
+          </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-2" for="StartDate">
           Start Date:</label>
-        <div class="col-md-5">
-          <input type="text" id="StartDate" name="StartDate" 
-          [(ngModel)]="StartDate" class="form-control col-md-4" 
+        <div class="col-md-2" [ngClass]="has-error">
+          <input type="text" id="StartDate" name="StartDate" [disabled]="parentdisable" #name3="ngModel"
+          [(ngModel)]="StartDate" class="form-control col-md-2" [required]="!parentdisable"
           type="date">
+          <div class="alert alert-danger" *ngIf="name3.invalid&&name3.touched">field is invalid</div>   
         </div>
-      </div>
-      <div class="form-group">
+      
         <label class="control-label col-md-2" for="EndDate">
           End Date:</label>
-        <div class="col-md-5">
-            <input type="text" id="EndDate" name="EndDate" 
-            [(ngModel)]="EndDate" class="form-control col-md-4" 
+        <div class="col-md-2" [ngClass]="has-error">
+            <input type="text" id="EndDate" name="EndDate" [disabled]="parentdisable" #name4="ngModel"
+            [(ngModel)]="EndDate" class="form-control col-md-2" [required]="!parentdisable"
             type="date">
+            <div class="alert alert-danger" *ngIf="name4.invalid&&name4.touched">field is invalid</div>   
         </div>
       </div>
       <div class="form-group">
+          <label class="control-label col-md-2" for="EmployeeID">
+            User:</label>
+          <div class="col-md-4">
+              <div class="col-md-8" [ngClass]="has-error">
+                <input type="text" id="EmployeeID" name="EmployeeID" #name5="ngModel"
+                [(ngModel)]="EmployeeID" class="form-control" readonly [required]="!parentdisable">  
+                <div class="alert alert-danger" *ngIf="name5.invalid&&name5.touched">field is invalid</div>    
+              </div>       
+                <button type="button" class="btn btn-primary" [disabled]="parentdisable" (click)="openUserModal(usertemplate)">Search</button>                      
+            </div>
+        </div>
+      <div class="form-group">
           <div class="col-md-6">
-                <input type="submit" value="Add Task" 
+                <input type="submit" value={{btnTaskTitle}} [disabled]="formname.invalid"
                 class="col-md-offset-5 btn btn-primary" 
                 id="btnAddTask" (click)="AddTask()" 
                 />                
@@ -64,29 +89,119 @@
                 class="col-md-offset-1 btn btn-secondary" 
                 id="btnReset" (click)="ResetFields()"/>                 
             </div>
-        </div>         
-          <div id="myModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-        
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-              </div>
-              <div class="modal-body">
-                <p>Some text in the modal.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-        
-            </div>
-          </div>          
-        
+        </div>                                 
       </form>      
-  </div>
+  </div>    
+  
+  <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title">Select Project</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          &times;</button>
+      </div>
+      <div class="modal-body">      
+          <table class="table table-bordered">
+            <tbody>   
+              <tr>
+                <td>
+                    <input type="text" id="searchproject" name="searchproject" (blur)="filterproject"
+                    [(ngModel)]="searchproject" class="form-control" placeholder="Search Project...">
+                </td>
+              </tr>           
+              <tr *ngFor="let Project of loadprojects">                                                     
+                  <td>
+                    <div class="divTaskDisplay">  
+                      {{Project.ProjectID}}
+                    </div>
+                  </td>                                             
+                  <td>
+                      <label class="labelPosition">{{Project.Project}}</label>                    
+                  </td>                
+                  <td>
+                      <button type="button" class="btn btn-danger" (click)="getSelectedProject(Project.ProjectID,Project.Project)">Select</button>
+                  </td>          
+              </tr>   
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">        
+      </div>
+    </ng-template>       
 
+    <ng-template #parenttemplate>
+      <div class="modal-header">
+        <h4 class="modal-title">Select Parent Task</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+          &times;</button>
+      </div>
+      <div class="modal-body">      
+          <table class="table table-bordered">
+            <tbody>   
+                <tr>
+                    <td>
+                        <input type="text" id="searchparent" name="searchparent" (blur)="filterparent"
+                        [(ngModel)]="searchparent" class="form-control" placeholder="Search Project...">
+                    </td>
+                  </tr>             
+              <tr *ngFor="let Parent of loadparent">                                                     
+                  <td>
+                    <div class="divTaskDisplay">  
+                      {{Parent.ParentID}}
+                    </div>
+                  </td>                                             
+                  <td>
+                      <label class="labelPosition">{{Parent.ParentTask}}</label>                    
+                  </td>                
+                  <td>
+                      <button type="button" class="btn btn-danger" (click)="getSelectedParent(Parent.ParentID,Parent.ParentTask)">Select</button>
+                  </td>          
+              </tr>   
+            </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">        
+      </div>
+    </ng-template>  
+
+    <ng-template #usertemplate>
+        <div class="modal-header">
+          <h4 class="modal-title">Select User</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            &times;</button>
+        </div>
+        <div class="modal-body">      
+            <table class="table table-bordered">
+              <tbody>  
+                  <tr>
+                      <td>
+                          <input type="text" id="searchuser" name="searchuser" (blur)="filteruser"
+                          [(ngModel)]="searchuser" class="form-control" placeholder="Search Employee ID...">
+                      </td>
+                    </tr>                 
+                <tr *ngFor="let User of loaduser">                                                     
+                    <td>
+                      <div class="divTaskDisplay">  
+                        {{User.UserID}}
+                      </div>
+                    </td>                                             
+                    <td>
+                        {{User.EmployeeID}}                    
+                    </td> 
+                    <td>
+                        {{User.FirstName}}                    
+                    </td> 
+                    <td>
+                        {{User.LastName}}                    
+                    </td>                
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="getSelectedUser(User.UserID,User.EmployeeID)">Select</button>
+                    </td>          
+                </tr>   
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">        
+        </div>
+      </ng-template>  
   
   

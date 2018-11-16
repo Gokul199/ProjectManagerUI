@@ -9,5 +9,6 @@ export class Task {
     Priority:Number;  
     StartDate:Date;
     EndDate:Date; 
-    Status:String;     
+    Status:String;   
+    Project:String;      
 }

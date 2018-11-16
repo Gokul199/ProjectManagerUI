@@ -4,6 +4,7 @@ import{Routes,RouterModule} from '@angular/router'
 import { ROUTES } from '@angular/router/src/router_config_loader';
 import { HttpClientModule } from '@angular/common/http';
 import{FormsModule} from '@angular/forms';
+import{BsModalService,ModalModule,BsModalRef} from 'ngx-bootstrap/modal/'
 
 import { AppComponent } from './app.component';
 import { EditprojectComponent } from './UI/editproject/editproject.component';
@@ -14,20 +15,24 @@ import { AddtaskComponent } from './UI/addtask/addtask.component';
 import { EdittaskComponent } from './UI/edittask/edittask.component';
 import { ViewtaskComponent } from './UI/viewtask/viewtask.component';
 
+
 const routes:Routes=[
   {path:'addproject',
   component:AddprojectComponent
 },
-{path:'editproject/:id',
+{path:'addproject/:id',
   component:EditprojectComponent
 },
 {path:'adduser',
   component:AdduserComponent
 },
-{path:'edituser/:id',
+{path:'adduser/:id',
   component:EdituserComponent
 },
 {path:'addtask',
+  component:AddtaskComponent
+},
+{path:'addtask/:id',
   component:AddtaskComponent
 },
 {path:'edittask/:id',
@@ -38,7 +43,7 @@ const routes:Routes=[
 }
 ];
 
-@NgModule({
+@NgModule({    
   declarations: [
     AppComponent,    
     EditprojectComponent,
@@ -52,9 +57,10 @@ const routes:Routes=[
   imports: [
     RouterModule.forRoot(routes),
     [BrowserModule,FormsModule],
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()    
   ],
-  providers: [],
+  providers: [BsModalService,BsModalRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

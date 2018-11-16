@@ -6,4 +6,6 @@ export class Project
     ProjectEndDate:Date;
     ProjectPriority:Number;
     ProjectManager:String;
+    NumberOfTasks:Number;
+    Completed:String;
 }
