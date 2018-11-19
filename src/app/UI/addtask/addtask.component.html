@@ -53,7 +53,8 @@
           Start Date:</label>
         <div class="col-md-2" [ngClass]="has-error">
           <input type="text" id="StartDate" name="StartDate" [disabled]="parentdisable" #name3="ngModel"
-          [(ngModel)]="StartDate" class="form-control col-md-2" [required]="!parentdisable"
+          [ngModel]="StartDate | date:'yyyy-MM-dd'" (ngModelChange)="StartDate=$event" 
+          class="form-control col-md-2" [required]="!parentdisable"
           type="date">
           <div class="alert alert-danger" *ngIf="name3.invalid&&name3.touched">field is invalid</div>   
         </div>
@@ -62,7 +63,8 @@
           End Date:</label>
         <div class="col-md-2" [ngClass]="has-error">
             <input type="text" id="EndDate" name="EndDate" [disabled]="parentdisable" #name4="ngModel"
-            [(ngModel)]="EndDate" class="form-control col-md-2" [required]="!parentdisable"
+            class="form-control col-md-2" [required]="!parentdisable"
+            [ngModel]="EndDate | date:'yyyy-MM-dd'" (ngModelChange)="EndDate=$event" 
             type="date">
             <div class="alert alert-danger" *ngIf="name4.invalid&&name4.touched">field is invalid</div>   
         </div>

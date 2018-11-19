@@ -36,30 +36,30 @@ export class SharedService {
   /** Service to Add a Task */  
   addTask(task:Task)
   {    
-    var newUrl=this.projectUrl+"/AddTask";
+    var newUrl=this.tasksUrl;
     return this.http.post<Task>(newUrl,JSON.stringify(task),httpOptions);
   }
  
   /** Service to Gat All Tasks */
   getTasks(): Observable<Task[]> { 
-    var newUrl=this.projectUrl+"/GetAllTasks";   
+    var newUrl=this.tasksUrl;   
     return this.http.get<Task[]>(newUrl);
   }
 
   getTask(ID:number):Observable<Task>{    
-    const url=`${this.projectUrl+"/GetTask"}/${ID}`;
+    const url=`${this.tasksUrl}/${ID}`;
     return this.http.get<Task>(url);
   }
  
   /** Service to Update Task */
   updateTask(id: Number, task: Task): Observable<any> {        
-    const url = `${this.projectUrl+"/UpdateTask"}/${id}`;    
+    const url = `${this.projectUrl+"/EditTask"}/${id}`;    
     return this.http.put(url, JSON.stringify(task), httpOptions);
   }
  
   /** Service to End Task */
   endTask(id: Number):Observable<any> {
-    const url = `${this.projectUrl+"DeleteTask"}/${id}`;
+    const url = `${this.projectUrl+"/DeleteTask"}/${id}`;
     return this.http.delete(url);  
   }  
 
@@ -77,13 +77,13 @@ export class SharedService {
  
   /** Service to Update Task */
   updateProject(id: Number, project: Project): Observable<any> {        
-    const url = `${this.projectUrl+"/UpdateProject"}/${id}`;    
+    const url = `${this.projectUrl+"/EditProject"}/${id}`;    
     return this.http.put(url, JSON.stringify(project), httpOptions);
   }
  
   /** Service to End Task */
   endProject(id: Number):Observable<any> {
-    const url = `${this.projectUrl+"DeleteProject"}/${id}`;
+    const url = `${this.projectUrl+"/DeleteProject"}/${id}`;
     return this.http.delete(url);  
   }  
 
@@ -101,13 +101,13 @@ export class SharedService {
  
   /** Service to Update Task */
   updateUser(id: Number, user: User): Observable<any> {        
-    const url = `${this.projectUrl+"/UpdateUser"}/${id}`;    
+    const url = `${this.projectUrl+"/EditUser"}/${id}`;    
     return this.http.put(url, JSON.stringify(user), httpOptions);
   }
  
   /** Service to End Task */
   endUser(id: Number):Observable<any> {
-    const url = `${this.projectUrl+"DeleteUser"}/${id}`;
+    const url = `${this.projectUrl+"/DeleteUser"}/${id}`;
     return this.http.delete(url);  
   }  
 

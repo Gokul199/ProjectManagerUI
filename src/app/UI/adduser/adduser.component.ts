@@ -23,7 +23,7 @@ export class AdduserComponent implements OnInit {
   UserID:Number;
   ProjectID:Number;
   TaskID:Number;
-  filteredEmployeeID:string;
+
 
   constructor(private route:ActivatedRoute,
     private router:Router,
@@ -41,6 +41,7 @@ export class AdduserComponent implements OnInit {
 
   AddUser()
   {    
+    debugger;
     let lstUser:User={
       UserID:0,
       FirstName:this.FirstName,
@@ -70,7 +71,7 @@ export class AdduserComponent implements OnInit {
     this.TaskID=this.filtereduser.find(data=>data.UserID==ID).TaskID;
   }
   deleteUser(ID)
-  {
+  {    
     this.sharedservice.endUser(ID).subscribe(()=>{this.GetUsers()});    
   }
   ResetFields()
@@ -83,8 +84,7 @@ export class AdduserComponent implements OnInit {
   Sort(field)
   {
     if(field=="FirstName")
-    {
-      debugger;
+    {      
       this.filtereduser.sort((a:any,b:any)=>{
         if(a.FirstName<b.FirstName)
         return -1;
@@ -95,8 +95,7 @@ export class AdduserComponent implements OnInit {
       });
     }
     if(field=="LastName")
-    {
-      debugger;
+    {      
       this.filtereduser.sort((a:any,b:any)=>{
         if(a.LastName<b.LastName)
         return -1;
@@ -107,8 +106,7 @@ export class AdduserComponent implements OnInit {
       });
     }
     if(field=="Id")
-    {
-      debugger;
+    {      
       this.filtereduser.sort((a:any,b:any)=>{
         if(a.EmployeeID<b.EmployeeID)
         return -1;
@@ -119,9 +117,16 @@ export class AdduserComponent implements OnInit {
       });
     }
   }
-  filter()
+  filteruser()
   {
-    this.filtereduser=this.filtereduser.filter(data=>data.EmployeeID.startsWith(this.filterEmployeeID));
+    debugger;
+    if(this.filterEmployeeID!=null && this.filterEmployeeID!="")
+    {
+      this.filtereduser=this.filtereduser.filter(data=>data.EmployeeID.startsWith(this.filterEmployeeID));
+    }
+    else{
+      this.GetUsers();
+    }
   }
 
 }

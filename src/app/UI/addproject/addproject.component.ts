@@ -62,7 +62,7 @@ export class AddprojectComponent implements OnInit {
     this.modalRef=this.modalService.show(template);
   }
   GetProjects()
-  {    
+  {        
     this.Projects=this.sharedservice.getProjects();
     this.Projects.subscribe(data=>{this.filteredProject=data});
   }
@@ -90,14 +90,18 @@ export class AddprojectComponent implements OnInit {
   }
   editProject(ID)
   {
+    debugger;
     this.btnProjectTitle="Update Project";
     this.ProjectID=ID;
-    this.Project=this.filteredProject.find(data=>data.ProjectID=ID).Project;
-    this.ProjectStartDate=this.filteredProject.find(data=>data.ProjectID=ID).ProjectStartDate;
-    this.ProjectEndDate=this.filteredProject.find(data=>data.ProjectID=ID).ProjectEndDate;
-    this.ProjectPriority=this.filteredProject.find(data=>data.ProjectID=ID).ProjectPriority;
-    this.ProjectManager=this.filteredProject.find(data=>data.ProjectID=ID).ProjectManager;
-    this.ResetFields();    
+    this.Project=this.filteredProject.find(data=>data.ProjectID==ID).Project;
+    this.ProjectStartDate=this.filteredProject.find(data=>data.ProjectID==ID).ProjectStartDate;
+    this.ProjectEndDate=this.filteredProject.find(data=>data.ProjectID==ID).ProjectEndDate;
+    if(this.ProjectStartDate!=null&&this.ProjectEndDate!=null)
+    {
+      this.DateCheck=true;
+    }
+    this.ProjectPriority=this.filteredProject.find(data=>data.ProjectID==ID).ProjectPriority;
+    this.ProjectManager=this.filteredProject.find(data=>data.ProjectID==ID).ProjectManager;    
   }
   deleteProject(ID)
   {
@@ -111,6 +115,7 @@ export class AddprojectComponent implements OnInit {
     this.ProjectPriority=0;
     this.ProjectManager="";
     this.btnProjectTitle="Add Project";
+    this.DateCheck=null;
   }
   filter()  
   {

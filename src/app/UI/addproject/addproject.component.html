@@ -16,15 +16,17 @@
       </div>
       <div class="col-md-2" [ngClass]="has-error">
         <input type="text" id="StartDate" name="StartDate" [disabled]="!DateCheck" 
-        [required]="DateCheck" #name2="ngModel" (blur)="ValidateDates()"
-        [(ngModel)]="ProjectStartDate" class="form-control col-md-2" placeholder="StartDate" 
+        [required]="DateCheck" #name2="ngModel" (blur)="ValidateDates()"  
+        [ngModel]="ProjectStartDate | date:'yyyy-MM-dd'" (ngModelChange)="ProjectStartDate=$event"      
+        class="form-control col-md-2" placeholder="StartDate" 
         type="date">
         <div class="alert alert-danger" *ngIf="name2.invalid">field is invalid</div>   
       </div>
       <div class="col-md-2" [ngClass]="has-error">
         <input type="text" id="EndDate" name="EndDate" [disabled]="!DateCheck" [required]="DateCheck" 
-        #name3="ngModel" (blur)="ValidateDates()"
-        [(ngModel)]="ProjectEndDate" class="form-control col-md-2" placeholder="End Date" type="date" >
+        #name3="ngModel" (blur)="ValidateDates()" 
+        [ngModel]="ProjectEndDate | date:'yyyy-MM-dd'" (ngModelChange)="ProjectEndDate=$event"
+        class="form-control col-md-2" placeholder="End Date" type="date" >
         <div class="alert alert-danger" *ngIf="name3.invalid">field is invalid</div>   
       </div>    
     </div>
@@ -49,8 +51,8 @@
     </div>
     <div class="form-group">
         <div class="col-md-9">
-              <input type="submit" value="Add" 
-              class="col-md-offset-9 btn btn-primary" 
+              <input type="submit" value="{{btnProjectTitle}}" 
+              class="col-md-offset-5 btn btn-primary" 
               id="btnAddProject" (click)="AddProject()" [disabled]="formname.invalid"
               />                
               <input type="button" value="Reset" 

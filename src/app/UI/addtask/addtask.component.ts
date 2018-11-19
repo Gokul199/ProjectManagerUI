@@ -138,9 +138,11 @@ export class AddtaskComponent implements OnInit {
     {
       let lstParent={
         ParentID:0,
-        ParentTask:this.ParentTask
+        ParentTask:this.Task
       }
-      this.sharedservice.addParent(lstParent).subscribe(()=>{});      
+      this.sharedservice.addParent(lstParent).subscribe(()=>{});     
+      this.parentdisable=false;
+      this.btnTaskTitle="Add Task"; 
     }
     else
     {
@@ -156,6 +158,9 @@ export class AddtaskComponent implements OnInit {
     this.Priority=null;
     this.StartDate=null;
     this.EndDate=null;
+    this.parentCheck=null;
+    this.Project="";
+    this.EmployeeID="";    
   }  
 
   getSelectedProject(ID,ProjectName)
